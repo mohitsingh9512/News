@@ -2,8 +2,6 @@ package com.example.tnews.ui.sources
 
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
-import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.tnews.R
 import com.example.tnews.databinding.SourcesFragmentBinding
@@ -58,7 +56,7 @@ class SourcesFragment : BaseMVVMFragment<SourcesFragmentBinding>() , SourcesList
     }
 
     override fun sourceClicked(newsSource : NewsSource) {
-        val fragment = NewsFragment.newInstance(newsSource.id)
+        val fragment = NewsFragment.newInstance(newsSource.id,newsSource.name)
         mActivityHelper.replaceFragment(requireActivity(),fragment,R.id.container,true)
     }
 

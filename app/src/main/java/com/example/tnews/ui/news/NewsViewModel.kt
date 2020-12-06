@@ -4,8 +4,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.tnews.network.response.Article
-import com.example.tnews.network.response.NewsSource
-import com.example.tnews.ui.sources.SourcesRepositoryImpl
 import javax.inject.Inject
 
 class NewsViewModel @Inject constructor(
@@ -15,6 +13,8 @@ class NewsViewModel @Inject constructor(
 
     val newsLiveData : LiveData<List<Article>>
         get() = _newsLiveData
+
+    val searchField = MutableLiveData<String>()
 
     fun getNews(sourceId : String) : LiveData<List<Article>> {
         _newsLiveData = newsRepositoryImpl.getNews(sourceId)

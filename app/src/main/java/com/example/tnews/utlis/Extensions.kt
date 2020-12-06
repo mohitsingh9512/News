@@ -1,5 +1,9 @@
 package com.example.tnews.utlis
 
+import android.app.Activity
+import android.content.Context
+import android.view.View
+import android.view.inputmethod.InputMethodManager
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -23,4 +27,9 @@ class CallBackKt<T>: Callback<T> {
         onResponse?.invoke(response)
     }
 
+}
+
+fun Context.hideKeyboard(view: View) {
+    val inputMethodManager = getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+    inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
 }

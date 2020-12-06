@@ -3,4 +3,6 @@
     <string name="source_image_description">Source Image</string>
     <string name="back_press_alert">Please click Back again to exit</string>
     <string name="read_full_story"><u>Read Full Story</u></string>
+    <string name="search_articles">Search Articles</string>
+    <string name="auto_fill_hints">tokopedia</string>
 </resources>

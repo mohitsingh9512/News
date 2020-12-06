@@ -5,7 +5,6 @@ import android.view.View
 import com.example.tnews.R
 import com.example.tnews.databinding.WebViewFragmentBinding
 import com.example.tnews.ui.BaseMVVMFragment
-import com.example.tnews.ui.news.NewsFragment
 import com.example.tnews.utlis.NEWS_WEB_VIEW_URL
 
 class WebViewFragment : BaseMVVMFragment<WebViewFragmentBinding>() {
@@ -19,6 +18,9 @@ class WebViewFragment : BaseMVVMFragment<WebViewFragmentBinding>() {
 
     override fun onCreateView(instance: Bundle?, binding: WebViewFragmentBinding) {
         webViewFragmentBinding = binding
+        webViewFragmentBinding.backIcon.setOnClickListener {
+            activity?.onBackPressed()
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,6 +32,7 @@ class WebViewFragment : BaseMVVMFragment<WebViewFragmentBinding>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         newsWebViewUrl?.let {
+            webViewFragmentBinding.toolbarText.text = it
             webViewFragmentBinding.webView.loadUrl(it)
         }
     }

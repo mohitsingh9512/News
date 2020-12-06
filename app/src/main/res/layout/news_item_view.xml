@@ -20,11 +20,13 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="11dp"
             android:layout_marginLeft="11dp"
-            android:layout_marginTop="7dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
             android:layout_marginEnd="11dp"
             android:layout_marginRight="11dp"
             app:cardCornerRadius="10dp"
             app:cardElevation="@dimen/cardview_default_elevation"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -39,6 +41,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="200dp"
                     android:scaleType="centerCrop"
+                    app:statusVisibility="@{model.urlToImage}"
                     android:contentDescription="@string/source_image_description"
                     app:imageUrl="@{model.urlToImage}"
                     tools:ignore="UnusedAttribute" />

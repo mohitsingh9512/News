@@ -12,8 +12,7 @@ import com.bumptech.glide.request.RequestOptions
 import com.bumptech.glide.request.transition.DrawableCrossFadeFactory
 import com.example.tnews.R
 import java.sql.Timestamp
-import java.text.SimpleDateFormat
-import java.util.*
+
 
 @BindingAdapter("data")
 fun <T> setRecyclerViewProperties(recyclerView: RecyclerView, data: T){
@@ -24,8 +23,8 @@ fun <T> setRecyclerViewProperties(recyclerView: RecyclerView, data: T){
 }
 
 @BindingAdapter("statusVisibility")
-fun setVisibility(view: View, s : String?) {
-    if (s.isNullOrBlank() ) {
+fun setVisibility(view: View, s: String?) {
+    if (s.isNullOrBlank() || "null" == s) {
         view.visibility = View.GONE
     } else {
         view.visibility = View.VISIBLE
