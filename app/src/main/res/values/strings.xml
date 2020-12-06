@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">T News</string>
+    <string name="source_image_description">Source Image</string>
 </resources>
