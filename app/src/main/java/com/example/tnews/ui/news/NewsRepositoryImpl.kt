@@ -25,7 +25,7 @@ class NewsRepositoryImpl @Inject constructor() : NewsRepository{
 
     override fun getNews(sourceId : String) : MutableLiveData<List<Article>>{
         scope.launch(parentSuperVisor) {
-            val sources = appDataSource.getNewsDao().getArticles()
+            val sources = appDataSource.getNewsDao().getArticles(sourceId)
             newsLiveData.postValue(sources)
 
             withContext(Dispatchers.Main){
@@ -34,6 +34,7 @@ class NewsRepositoryImpl @Inject constructor() : NewsRepository{
                         it.body()?.let {result ->
                             if(result.articles != null && result.articles.isNotEmpty()){
                                 newsLiveData.value = result.articles
+                                insertArticlesInDB(result.articles, sourceId)
                             }
                         }
                     }
@@ -48,6 +49,14 @@ class NewsRepositoryImpl @Inject constructor() : NewsRepository{
         return newsLiveData
     }
 
+    private fun insertArticlesInDB(articles : List<Article> , sourceId : String){
+        scope.launch(parentSuperVisor) {
+            for (article in articles){
+                article.sourceId = sourceId
+            }
+            appDataSource.getNewsDao().insertArticles(articles)
+        }
+    }
     fun stopProcesses(){
         parentSuperVisor.cancelChildren()
     }

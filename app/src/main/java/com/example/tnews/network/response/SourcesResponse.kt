@@ -16,6 +16,7 @@ data class SourcesResponse(
 @Entity(tableName = "sources")
 data class NewsSource(
     @PrimaryKey
+    @Expose(serialize = false, deserialize = false)
     @ColumnInfo(name = "id")
     val id : String,
     @ColumnInfo(name = "name")

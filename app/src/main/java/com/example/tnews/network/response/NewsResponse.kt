@@ -1,6 +1,8 @@
 package com.example.tnews.network.response
 
 import androidx.room.*
+import com.google.gson.annotations.Expose
+import java.sql.Timestamp
 
 data class NewsResponse(
     val status : String,
@@ -11,10 +13,12 @@ data class NewsResponse(
 @Entity(tableName = "articles")
 data class Article(
     @PrimaryKey(autoGenerate = true)
+    @Expose(serialize = false, deserialize = false)
     @ColumnInfo(name = "id")
     val id : Int,
-    @Embedded(prefix = "source_")
-    val source : ArticleSource? = null,
+    @Transient
+    @ColumnInfo(name = "source")
+    var sourceId : String,
     @ColumnInfo(name = "author")
     val author : String?,
     @ColumnInfo(name = "title")
@@ -26,12 +30,7 @@ data class Article(
     @ColumnInfo(name = "url_to_image")
     val urlToImage : String?,
     @ColumnInfo(name = "published_at")
-    val publishedAt : String?,
+    val publishedAt : Timestamp?,
     @ColumnInfo(name = "content")
     val content : String?
-)
-
-data class ArticleSource (
-    val id : String?,
-    val name : String?
 )

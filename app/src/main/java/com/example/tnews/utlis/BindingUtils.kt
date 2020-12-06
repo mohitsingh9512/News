@@ -11,6 +11,7 @@ import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.RequestOptions
 import com.bumptech.glide.request.transition.DrawableCrossFadeFactory
 import com.example.tnews.R
+import java.sql.Timestamp
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -23,11 +24,11 @@ fun <T> setRecyclerViewProperties(recyclerView: RecyclerView, data: T){
 }
 
 @BindingAdapter("statusVisibility")
-fun setVisibility(view: View, status: Int) {
-    if (status == 1 ) {
-        view.visibility = View.VISIBLE
+fun setVisibility(view: View, s : String?) {
+    if (s.isNullOrBlank() ) {
+        view.visibility = View.GONE
     } else {
-        view.visibility = View.INVISIBLE
+        view.visibility = View.VISIBLE
     }
 }
 
@@ -65,29 +66,23 @@ fun loadImage(imageView: ImageView, imageUrl: String?, sourceUrl: Boolean?) {
     }
 }
 
-fun getNormalTime(utcDateString: String): String {
-    val dateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'")
-    val date = dateFormat.parse(utcDateString)
-    if(date != null){
-        var timeElapsedInSeconds = (System.currentTimeMillis() - date.time) / 1000
-        return when {
-            timeElapsedInSeconds < 60 -> {
-                "less than 1m ago"
-            }
-            timeElapsedInSeconds < 3600 -> {
-                timeElapsedInSeconds /= 60
-                timeElapsedInSeconds.toString() + "m ago"
-            }
-            timeElapsedInSeconds < 86400 -> {
-                timeElapsedInSeconds /= 3600
-                timeElapsedInSeconds.toString() + "h ago"
-            }
-            else -> {
-                timeElapsedInSeconds /= 86400
-                timeElapsedInSeconds.toString() + "d ago"
-            }
+fun getNormalTime(utcTimeStamp: Timestamp): String {
+    var timeElapsedInSeconds = (System.currentTimeMillis() - utcTimeStamp.time) / 1000
+    return when {
+        timeElapsedInSeconds < 60 -> {
+            "less than 1m ago"
+        }
+        timeElapsedInSeconds < 3600 -> {
+            timeElapsedInSeconds /= 60
+            timeElapsedInSeconds.toString() + "m ago"
+        }
+        timeElapsedInSeconds < 86400 -> {
+            timeElapsedInSeconds /= 3600
+            timeElapsedInSeconds.toString() + "h ago"
+        }
+        else -> {
+            timeElapsedInSeconds /= 86400
+            timeElapsedInSeconds.toString() + "d ago"
         }
     }
-
-    return  ""
 }

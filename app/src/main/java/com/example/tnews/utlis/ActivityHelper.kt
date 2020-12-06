@@ -10,12 +10,11 @@ class ActivityHelper constructor() {
             fragment : Fragment,
             containerId : Int,
             addToBackStack : Boolean = false,
-            tag : String
     ){
         val manager = activity.supportFragmentManager
         val fragmentTransaction = manager.beginTransaction()
         fragmentTransaction.apply {
-            add(containerId,fragment,tag)
+            add(containerId,fragment)
             if(addToBackStack)
                 addToBackStack(fragment.javaClass.simpleName)
             commit()

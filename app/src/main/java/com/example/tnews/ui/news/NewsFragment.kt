@@ -11,13 +11,19 @@ import com.example.tnews.network.response.Article
 import com.example.tnews.network.response.NewsSource
 import com.example.tnews.ui.BaseMVVMFragment
 import com.example.tnews.ui.sources.SourcesAdapter
+import com.example.tnews.ui.webview.WebViewFragment
+import com.example.tnews.utlis.ActivityHelper
 import com.example.tnews.utlis.NEWS_SOURCE_ID
+import javax.inject.Inject
 
 class NewsFragment : BaseMVVMFragment<NewsFragmentBinding>() , NewsListener{
 
     private lateinit var newsFragmentBinding: NewsFragmentBinding
     private var newsViewModel : NewsViewModel? = null
     private var sourceId: String? = null
+
+    @Inject
+    lateinit var mActivityHelper: ActivityHelper
 
     override fun getLayoutResId(): Int {
         return R.layout.news_fragment
@@ -62,7 +68,10 @@ class NewsFragment : BaseMVVMFragment<NewsFragmentBinding>() , NewsListener{
     }
 
     override fun newsClicked(article : Article) {
-
+        if(!article.url.isNullOrBlank()){
+            val fragment = WebViewFragment.newInstance(article.url)
+            mActivityHelper.replaceFragment(requireActivity(),fragment,R.id.container,true)
+        }
     }
 
 }

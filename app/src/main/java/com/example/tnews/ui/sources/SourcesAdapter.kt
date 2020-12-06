@@ -33,7 +33,8 @@ class SourcesAdapter(var listener : SourcesListener) : RecyclerView.Adapter<Sour
 
     override fun setData(data: List<NewsSource>?) {
         list = data ?: emptyList()
-        notifyDataSetChanged()
+        if(list.isNotEmpty())
+            notifyDataSetChanged()
     }
 
     inner class SourcesViewHolder(private val binding: SourcesItemViewBinding) : RecyclerView.ViewHolder(binding.root) {

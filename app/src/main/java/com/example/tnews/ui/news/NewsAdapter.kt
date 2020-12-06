@@ -33,7 +33,8 @@ class NewsAdapter(var listener : NewsListener) : RecyclerView.Adapter<NewsAdapte
 
     override fun setData(data: List<Article>?) {
         list = data ?: emptyList()
-        notifyDataSetChanged()
+        if(list.isNotEmpty())
+            notifyDataSetChanged()
     }
 
     inner class NewsViewHolder(private val binding: NewsItemViewBinding) : RecyclerView.ViewHolder(binding.root) {

@@ -16,7 +16,6 @@ class NewsViewModel @Inject constructor(
     val newsLiveData : LiveData<List<Article>>
         get() = _newsLiveData
 
-
     fun getNews(sourceId : String) : LiveData<List<Article>> {
         _newsLiveData = newsRepositoryImpl.getNews(sourceId)
         return newsLiveData

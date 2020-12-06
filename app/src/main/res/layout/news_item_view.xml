@@ -72,38 +72,33 @@
                 <TextView
                     android:id="@+id/author"
                     android:layout_width="wrap_content"
-                    android:layout_height="20dp"
+                    android:layout_height="wrap_content"
                     android:layout_below="@id/desc"
                     android:layout_marginStart="16dp"
                     android:layout_marginLeft="16dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="10dp"
-                    android:drawablePadding="10dp"
+                    android:layout_marginTop="8dp"
                     android:ellipsize="end"
                     android:fontFamily="sans-serif-light"
                     android:maxLines="1"
+                    app:statusVisibility="@{model.author}"
                     android:text="@{model.author}"
                     android:singleLine="true"
                     android:textStyle="bold"
-                    tools:text="Source" />
+                    tools:text="Author" />
 
 
                 <TextView
                     android:id="@+id/time"
                     android:layout_width="wrap_content"
-                    android:layout_height="20dp"
-                    android:layout_below="@id/desc"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="10dp"
-                    android:layout_toEndOf="@id/author"
-                    android:layout_toRightOf="@id/author"
-                    android:drawablePadding="10dp"
-                    android:ellipsize="end"
-                    android:maxLines="1"
-                    android:layout_marginLeft="4dp"
-                    android:singleLine="true"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/author"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginLeft="16dp"
                     tools:text="Time"
-                    android:layout_marginStart="4dp" />
+                    android:text="@{BindingUtilsKt.getNormalTime(model.publishedAt)}"
+                    />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -112,9 +107,8 @@
                     android:text="@string/read_full_story"
                     android:layout_alignParentEnd="true"
                     android:layout_alignParentRight="true"
-                    android:layout_below="@id/desc"
-                    android:layout_marginTop="10dp"
                     android:layout_marginEnd="16dp"
+                    android:layout_below="@id/author"
                     android:layout_marginRight="16dp" />
 
             </RelativeLayout>
