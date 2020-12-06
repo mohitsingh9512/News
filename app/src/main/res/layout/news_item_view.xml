@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
     <data>
+        <import type="com.example.tnews.utlis.BindingUtilsKt"/>
+
         <variable
             name="model"
             type="com.example.tnews.network.response.Article" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
@@ -42,66 +43,6 @@
                     app:imageUrl="@{model.urlToImage}"
                     tools:ignore="UnusedAttribute" />
 
-                <ImageView
-                    android:id="@+id/shadow_bottom"
-                    android:layout_width="match_parent"
-                    android:layout_height="80dp"
-                    android:layout_alignBottom="@id/img" />
-
-                <TextView
-                    android:id="@+id/author"
-                    android:layout_width="match_parent"
-                    android:layout_height="30dp"
-                    android:layout_alignStart="@+id/title"
-                    android:layout_alignLeft="@+id/title"
-                    android:layout_alignTop="@+id/layoutDate"
-                    android:layout_alignEnd="@id/layoutDate"
-                    android:layout_alignRight="@id/layoutDate"
-                    android:layout_marginEnd="160dp"
-                    android:layout_marginRight="160dp"
-                    android:drawablePadding="10dp"
-                    android:ellipsize="end"
-                    android:gravity="bottom"
-                    android:maxLines="1"
-                    android:singleLine="true"
-                    android:textColor="@android:color/white"
-                    android:text="@{model.author}"
-                    tools:text="Author" />
-
-                <FrameLayout
-                    android:id="@+id/layoutDate"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/img"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginTop="-50dp"
-                    android:layout_marginEnd="20dp"
-                    android:layout_marginRight="20dp"
-                    android:padding="5dp">
-
-                    <ImageView
-                        android:layout_width="18dp"
-                        android:layout_height="18dp"
-                        android:layout_marginLeft="5dp"
-                        android:layout_marginRight="5dp" />
-
-                    <TextView
-                        android:id="@+id/publishedAt"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="27dp"
-                        android:layout_marginLeft="27dp"
-                        android:layout_marginEnd="10dp"
-                        android:layout_marginRight="10dp"
-                        android:textColor="#606060"
-                        android:text="@{model.publishedAt}"
-                        tools:text="12 December 1995" />
-
-
-                </FrameLayout>
-
-
                 <TextView
                     android:id="@+id/title"
                     android:layout_width="match_parent"
@@ -129,7 +70,7 @@
                     tools:text="Desc" />
 
                 <TextView
-                    android:id="@+id/source"
+                    android:id="@+id/author"
                     android:layout_width="wrap_content"
                     android:layout_height="20dp"
                     android:layout_below="@id/desc"
@@ -141,7 +82,7 @@
                     android:ellipsize="end"
                     android:fontFamily="sans-serif-light"
                     android:maxLines="1"
-                    android:text="@{model.source.name}"
+                    android:text="@{model.author}"
                     android:singleLine="true"
                     android:textStyle="bold"
                     tools:text="Source" />
@@ -154,14 +95,27 @@
                     android:layout_below="@id/desc"
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="10dp"
-                    android:layout_toEndOf="@id/source"
-                    android:layout_toRightOf="@id/source"
+                    android:layout_toEndOf="@id/author"
+                    android:layout_toRightOf="@id/author"
                     android:drawablePadding="10dp"
                     android:ellipsize="end"
                     android:maxLines="1"
+                    android:layout_marginLeft="4dp"
                     android:singleLine="true"
-                    tools:text="Time" />
+                    tools:text="Time"
+                    android:layout_marginStart="4dp" />
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/read_full_story"
+                    android:text="@string/read_full_story"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_below="@id/desc"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginRight="16dp" />
 
             </RelativeLayout>
 

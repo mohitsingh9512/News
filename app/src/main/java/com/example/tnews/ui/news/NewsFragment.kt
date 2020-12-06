@@ -42,9 +42,7 @@ class NewsFragment : BaseMVVMFragment<NewsFragmentBinding>() , NewsListener{
     }
 
     private fun getNews(binding: NewsFragmentBinding) {
-        newsViewModel?.getNews(sourceId!!)?.observe(viewLifecycleOwner,{
-            Log.v("TAG",it.toString())
-        })
+        newsViewModel?.getNews(sourceId!!)
         binding.rvNews.layoutManager = LinearLayoutManager(
             context,
             LinearLayoutManager.VERTICAL,

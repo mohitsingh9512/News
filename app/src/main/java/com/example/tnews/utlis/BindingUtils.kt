@@ -3,7 +3,6 @@ package com.example.tnews.utlis
 import android.view.View
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.Priority
@@ -12,6 +11,8 @@ import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.RequestOptions
 import com.bumptech.glide.request.transition.DrawableCrossFadeFactory
 import com.example.tnews.R
+import java.text.SimpleDateFormat
+import java.util.*
 
 @BindingAdapter("data")
 fun <T> setRecyclerViewProperties(recyclerView: RecyclerView, data: T){
@@ -30,8 +31,9 @@ fun setVisibility(view: View, status: Int) {
     }
 }
 
-@BindingAdapter("imageUrl","sourceUrl", requireAll = false)
-fun loadImage(imageView: ImageView, imageUrl: String?, sourceUrl : Boolean?) {
+@BindingAdapter("imageUrl", "sourceUrl", requireAll = false)
+fun loadImage(imageView: ImageView, imageUrl: String?, sourceUrl: Boolean?) {
+    // Load Fav icon image for sources placed on root of sites.
     var url = imageUrl
     if(sourceUrl == true){
         url += "/favicon.ico"
@@ -61,4 +63,31 @@ fun loadImage(imageView: ImageView, imageUrl: String?, sourceUrl : Boolean?) {
             setImageBitmap(null)
         }
     }
+}
+
+fun getNormalTime(utcDateString: String): String {
+    val dateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'")
+    val date = dateFormat.parse(utcDateString)
+    if(date != null){
+        var timeElapsedInSeconds = (System.currentTimeMillis() - date.time) / 1000
+        return when {
+            timeElapsedInSeconds < 60 -> {
+                "less than 1m ago"
+            }
+            timeElapsedInSeconds < 3600 -> {
+                timeElapsedInSeconds /= 60
+                timeElapsedInSeconds.toString() + "m ago"
+            }
+            timeElapsedInSeconds < 86400 -> {
+                timeElapsedInSeconds /= 3600
+                timeElapsedInSeconds.toString() + "h ago"
+            }
+            else -> {
+                timeElapsedInSeconds /= 86400
+                timeElapsedInSeconds.toString() + "d ago"
+            }
+        }
+    }
+
+    return  ""
 }

@@ -51,13 +51,15 @@
                     android:layout_marginLeft="16dp"
                     android:layout_marginTop="10dp"
                     android:layout_toRightOf="@id/source_img"
-                    android:layout_marginRight="16dp"
+                    android:layout_marginRight="32dp"
                     android:fontFamily="sans-serif-light"
                     android:textSize="17sp"
                     android:textStyle="bold"
                     android:text="@{model.name}"
                     tools:text="Title"
-                    android:layout_toEndOf="@id/source_img" />
+                    android:layout_toEndOf="@id/source_img"
+                    android:layout_marginEnd="32dp"
+                    android:layout_marginStart="16dp" />
 
 
                 <TextView
@@ -68,11 +70,23 @@
                     android:layout_marginLeft="16dp"
                     android:layout_marginTop="5dp"
                     android:layout_toRightOf="@id/source_img"
-                    android:layout_marginRight="16dp"
+                    android:layout_marginRight="32dp"
                     android:text="@{model.description}"
                     tools:text="Desc"
-                    android:layout_toEndOf="@id/source_img" />
+                    android:layout_toEndOf="@id/source_img"
+                    android:layout_marginEnd="32dp"
+                    android:layout_marginStart="16dp" />
 
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/chevron"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="8dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:contentDescription="@string/source_image_description"
+                    android:layout_marginEnd="8dp" />
             </RelativeLayout>
 
         </androidx.cardview.widget.CardView>

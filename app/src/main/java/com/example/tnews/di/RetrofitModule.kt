@@ -32,9 +32,8 @@ class RetrofitModule {
     @Provides
     fun providesHttpClient(): OkHttpClient {
 
-        //TODO Remove Logging
         val loggingInterceptor = HttpLoggingInterceptor()
-        loggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
+        loggingInterceptor.level = HttpLoggingInterceptor.Level.NONE
 
         val httpBuilder = OkHttpClient.Builder()
         httpBuilder

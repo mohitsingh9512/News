@@ -59,7 +59,7 @@ class SourcesFragment : BaseMVVMFragment<SourcesFragmentBinding>() , SourcesList
 
     override fun sourceClicked(newsSource : NewsSource) {
         val fragment = NewsFragment.newInstance(newsSource.id)
-        mActivityHelper.replaceFragment(requireActivity(),fragment,R.id.container,false)
+        mActivityHelper.replaceFragment(requireActivity(),fragment,R.id.container,true)
     }
 
 }

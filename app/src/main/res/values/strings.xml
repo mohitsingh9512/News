@@ -1,4 +1,6 @@
 <resources>
     <string name="app_name">T News</string>
     <string name="source_image_description">Source Image</string>
+    <string name="back_press_alert">Please click Back again to exit</string>
+    <string name="read_full_story"><u>Read Full Story</u></string>
 </resources>
