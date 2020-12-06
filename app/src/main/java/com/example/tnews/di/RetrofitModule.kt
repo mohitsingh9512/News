@@ -1,5 +1,6 @@
 package com.example.tnews.di
 
+import com.example.tnews.BuildConfig
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import dagger.Module
@@ -41,7 +42,7 @@ class RetrofitModule {
             .readTimeout(20, TimeUnit.SECONDS)
 
         httpBuilder.addInterceptor { chain ->
-            val request = chain.request().newBuilder().addHeader("X-Api-Key","1cdf417b1eb3448d9532f3fc6765de4b").build()
+            val request = chain.request().newBuilder().addHeader("X-Api-Key",BuildConfig.ApiKey).build()
             chain.proceed(request)
         }
         return httpBuilder.build()
