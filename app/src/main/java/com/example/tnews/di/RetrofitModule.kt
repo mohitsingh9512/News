@@ -33,7 +33,7 @@ class RetrofitModule {
     fun providesHttpClient(): OkHttpClient {
 
         val loggingInterceptor = HttpLoggingInterceptor()
-        loggingInterceptor.level = HttpLoggingInterceptor.Level.NONE
+        loggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
 
         val httpBuilder = OkHttpClient.Builder()
         httpBuilder
@@ -44,6 +44,7 @@ class RetrofitModule {
             val request = chain.request().newBuilder().addHeader("X-Api-Key",BuildConfig.ApiKey).build()
             chain.proceed(request)
         }
+        //httpBuilder.addInterceptor(loggingInterceptor)
         return httpBuilder.build()
     }
 
