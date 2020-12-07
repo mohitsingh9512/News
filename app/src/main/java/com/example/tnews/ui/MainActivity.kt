@@ -20,7 +20,9 @@ class MainActivity : DaggerAppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        initNewsFragment()
+        if (savedInstanceState == null) {
+            initNewsFragment()
+        }
     }
 
     private fun initNewsFragment() {

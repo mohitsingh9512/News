@@ -37,20 +37,20 @@ class NewsFragment : BaseMVVMFragment<NewsFragmentBinding>() , NewsListener{
     }
 
     override fun onCreateView(instance: Bundle?, binding: NewsFragmentBinding) {
-        newsViewModel = getViewModel(NewsViewModel::class.java)
         newsFragmentBinding = binding
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        newsViewModel = getViewModel(NewsViewModel::class.java)
         newsFragmentBinding.viewModel = newsViewModel
-        binding.lifecycleOwner = viewLifecycleOwner
+        newsFragmentBinding.lifecycleOwner = viewLifecycleOwner
         initData()
         setListeners()
         getNews()
         newsViewModel?.searchField?.observe(viewLifecycleOwner,{
 
         })
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
     }
 
     private fun initData(){

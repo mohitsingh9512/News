@@ -2,6 +2,7 @@ package com.example.tnews.ui.sources
 
 import androidx.lifecycle.MutableLiveData
 import com.example.tnews.network.MainApiInterface
+import com.example.tnews.network.response.Article
 import com.example.tnews.network.response.NewsSource
 import com.example.tnews.persistance.AppDatabase
 import com.example.tnews.utlis.enqueue
@@ -34,6 +35,7 @@ class SourcesRepositoryImpl @Inject constructor() : SourcesRepository{
                         it.body()?.let {result ->
                             if(result.newsSources != null && result.newsSources.isNotEmpty()){
                                 newsSourcesLiveData.value = result.newsSources
+                                insertNewsSourcesInDB(result.newsSources)
                             }
                         }
                     }
@@ -46,6 +48,12 @@ class SourcesRepositoryImpl @Inject constructor() : SourcesRepository{
         }
 
         return newsSourcesLiveData
+    }
+
+    private fun insertNewsSourcesInDB(newsSources : List<NewsSource>){
+        scope.launch(parentSuperVisor) {
+            appDataSource.getSourcesDao().insertSources(newsSources)
+        }
     }
 
     fun stopProcesses(){

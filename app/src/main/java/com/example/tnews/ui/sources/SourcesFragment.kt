@@ -24,25 +24,25 @@ class SourcesFragment : BaseMVVMFragment<SourcesFragmentBinding>() , SourcesList
     }
 
     override fun onCreateView(instance: Bundle?, binding: SourcesFragmentBinding) {
-        sourceViewModel = getViewModel(SourcesViewModel::class.java)
         sourcesFragmentBinding = binding
-        sourcesFragmentBinding.viewModel = sourceViewModel
-        binding.lifecycleOwner = viewLifecycleOwner
-        getSources(sourcesFragmentBinding)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        sourceViewModel = getViewModel(SourcesViewModel::class.java)
+        sourcesFragmentBinding.viewModel = sourceViewModel
+        sourcesFragmentBinding.lifecycleOwner = viewLifecycleOwner
+        getSources()
     }
 
-    private fun getSources(binding: SourcesFragmentBinding) {
+    private fun getSources() {
         sourceViewModel?.getSources()
-        binding.rvSources.layoutManager = LinearLayoutManager(
+        sourcesFragmentBinding.rvSources.layoutManager = LinearLayoutManager(
             context,
             LinearLayoutManager.VERTICAL,
             false
         )
-        binding.rvSources.adapter = SourcesAdapter(this)
+        sourcesFragmentBinding.rvSources.adapter = SourcesAdapter(this)
     }
 
     companion object {
