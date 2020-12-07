@@ -20,11 +20,11 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginRight="8dp"
-                android:layout_marginEnd="8dp">
+                android:layout_marginRight="@dimen/d_8sdp"
+                android:layout_marginEnd="@dimen/d_8sdp">
 
                 <ImageView
-                    android:layout_width="35dp"
+                    android:layout_width="@dimen/d_35sdp"
                     android:layout_height="match_parent"
                     android:id="@+id/search_icon"
                     android:src="@drawable/search"
@@ -35,7 +35,7 @@
                     android:contentDescription="@string/source_image_description" />
 
                 <ImageView
-                    android:layout_width="35dp"
+                    android:layout_width="@dimen/d_35sdp"
                     android:layout_height="match_parent"
                     android:id="@+id/close_icon"
                     android:src="@drawable/close"
@@ -46,7 +46,7 @@
                     android:layout_alignParentRight="true" />
 
                 <ImageView
-                    android:layout_width="35dp"
+                    android:layout_width="@dimen/d_35sdp"
                     android:layout_height="match_parent"
                     android:src="@drawable/back"
                     android:id="@+id/back_icon"
@@ -67,11 +67,10 @@
                     android:layout_toEndOf="@id/back_icon"
                     android:text="@={viewModel.searchField}"
                     tools:visibility="visible"
-                    android:layout_marginRight="50dp"
+                    android:layout_marginRight="@dimen/d_50sdp"
                     android:visibility="gone"
                     android:inputType="text"
-                    android:layout_marginEnd="50dp"
-                    android:autofillHints="@string/auto_fill_hints"
+                    android:layout_marginEnd="@dimen/d_50sdp"
                     />
 
                 <TextView
@@ -85,8 +84,9 @@
                     android:layout_toEndOf="@id/back_icon"
                     tools:visibility="visible"
                     android:visibility="visible"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginStart="8dp"
+                    android:layout_marginLeft="@dimen/d_8sdp"
+                    android:layout_marginStart="@dimen/d_8sdp"
+                    android:textColor="?android:attr/textColorPrimary"
                     />
             </RelativeLayout>
         </androidx.appcompat.widget.Toolbar>

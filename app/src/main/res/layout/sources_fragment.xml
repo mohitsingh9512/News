@@ -36,7 +36,9 @@
                     tools:visibility="visible"
                     android:visibility="visible"
                     android:layout_marginLeft="10dp"
-                    android:layout_marginStart="10dp" />
+                    android:layout_marginStart="10dp"
+                    android:textColor="?android:attr/textColorPrimary"
+                    />
 
             </RelativeLayout>
         </androidx.appcompat.widget.Toolbar>

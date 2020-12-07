@@ -34,7 +34,7 @@
                     android:layout_height="match_parent"
                     tools:text="Toolbar"
                     android:gravity="center"
-                    android:textSize="20sp"
+                    android:textSize="18sp"
                     android:id="@+id/toolbar_text"
                     android:layout_toRightOf="@id/back_icon"
                     android:layout_toEndOf="@id/back_icon"
@@ -44,6 +44,7 @@
                     android:layout_marginStart="8dp"
                     android:singleLine="true"
                     android:ellipsize="end"
+                    android:textColor="?android:attr/textColorPrimary"
                     />
 
             </RelativeLayout>

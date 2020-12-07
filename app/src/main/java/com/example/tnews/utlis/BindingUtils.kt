@@ -38,23 +38,23 @@ fun loadImage(imageView: ImageView, imageUrl: String?, sourceUrl: Boolean?) {
     if(sourceUrl == true){
         url += "/favicon.ico"
     }
-    if (url != null) {
+    if (imageUrl != null) {
         if (imageView.getTag(R.id.image_url) == null || imageView.getTag(R.id.image_url) != url) {
             imageView.apply {
                 setImageBitmap(null)
                 setTag(R.id.image_url, url)
                 val factory = DrawableCrossFadeFactory.Builder().setCrossFadeEnabled(true).build()
                 val options: RequestOptions = RequestOptions()
-                        .centerCrop()
-                        .diskCacheStrategy(DiskCacheStrategy.ALL)
-                        .priority(Priority.HIGH)
-                        .dontAnimate()
-                        .dontTransform()
+                    .centerCrop()
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                    .priority(Priority.HIGH)
+                    .dontAnimate()
+                    .dontTransform()
                 Glide.with(this)
-                        .load(url)
-                        .apply(options)
-                        .transition(DrawableTransitionOptions.withCrossFade(factory))
-                        .into(this)
+                    .load(url)
+                    .apply(options)
+                    .transition(DrawableTransitionOptions.withCrossFade(factory))
+                    .into(this)
             }
         }
     } else {

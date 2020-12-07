@@ -8,10 +8,7 @@ import com.example.tnews.databinding.NewsFragmentBinding
 import com.example.tnews.network.response.Article
 import com.example.tnews.ui.BaseMVVMFragment
 import com.example.tnews.ui.webview.WebViewFragment
-import com.example.tnews.utlis.ActivityHelper
-import com.example.tnews.utlis.NEWS_SOURCE_ID
-import com.example.tnews.utlis.NEWS_SOURCE_NAME
-import com.example.tnews.utlis.hideKeyboard
+import com.example.tnews.utlis.*
 import javax.inject.Inject
 
 class NewsFragment : BaseMVVMFragment<NewsFragmentBinding>() , NewsListener{
@@ -73,6 +70,8 @@ class NewsFragment : BaseMVVMFragment<NewsFragmentBinding>() , NewsListener{
                 closeIcon.visibility = View.VISIBLE
                 searchIcon.visibility = View.GONE
                 toolbarText.visibility = View.GONE
+                etSearch.requestFocus()
+                context?.showKeyboard(etSearch)
             }
         }
         newsFragmentBinding.closeIcon.setOnClickListener {
@@ -83,6 +82,7 @@ class NewsFragment : BaseMVVMFragment<NewsFragmentBinding>() , NewsListener{
                 searchIcon.visibility = View.VISIBLE
                 toolbarText.visibility = View.VISIBLE
             }
+            searchLocal("")
         }
         newsFragmentBinding.backIcon.setOnClickListener {
             activity?.onBackPressed()
