@@ -24,7 +24,7 @@
                 android:layout_marginEnd="@dimen/d_8sdp">
 
                 <ImageView
-                    android:layout_width="@dimen/d_35sdp"
+                    android:layout_width="@dimen/d_25sdp"
                     android:layout_height="match_parent"
                     android:id="@+id/search_icon"
                     android:src="@drawable/search"
@@ -35,7 +35,7 @@
                     android:contentDescription="@string/source_image_description" />
 
                 <ImageView
-                    android:layout_width="@dimen/d_35sdp"
+                    android:layout_width="@dimen/d_25sdp"
                     android:layout_height="match_parent"
                     android:id="@+id/close_icon"
                     android:src="@drawable/close"
@@ -46,7 +46,7 @@
                     android:layout_alignParentRight="true" />
 
                 <ImageView
-                    android:layout_width="@dimen/d_35sdp"
+                    android:layout_width="@dimen/d_25sdp"
                     android:layout_height="match_parent"
                     android:src="@drawable/back"
                     android:id="@+id/back_icon"

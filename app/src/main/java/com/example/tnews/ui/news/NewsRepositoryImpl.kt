@@ -4,18 +4,9 @@ import androidx.lifecycle.MutableLiveData
 import com.example.tnews.network.MainApiInterface
 import com.example.tnews.network.response.Article
 import com.example.tnews.persistance.AppDatabase
-import com.example.tnews.utlis.enqueue
-import kotlinx.coroutines.*
 import javax.inject.Inject
 
 class NewsRepositoryImpl @Inject constructor() : NewsRepository{
-
-    private val scope: CoroutineScope = CoroutineScope(Dispatchers.Default)
-    private val parentSuperVisor = SupervisorJob()
-
-    private val newsLiveData : MutableLiveData<List<Article>> by lazy {
-        MutableLiveData<List<Article>>()
-    }
 
     @Inject
     lateinit var mainApiInterface: MainApiInterface
@@ -23,51 +14,29 @@ class NewsRepositoryImpl @Inject constructor() : NewsRepository{
     @Inject
     lateinit var appDataSource : AppDatabase
 
-    override fun getNews(sourceId : String) : MutableLiveData<List<Article>>{
-        scope.launch(parentSuperVisor) {
-            val sources = appDataSource.getNewsDao().getArticles(sourceId)
-            newsLiveData.postValue(sources)
+    override suspend fun getNews(sourceId: String, articlesLiveData: MutableLiveData<List<Article>>) {
+        val sources = appDataSource.getNewsDao().getArticles(sourceId)
+        articlesLiveData.postValue(sources)
 
-            withContext(Dispatchers.Main){
-                mainApiInterface.getNews(sourceId).enqueue {
-                    onResponse = {
-                        it.body()?.let {result ->
-                            if(result.articles != null && result.articles.isNotEmpty()){
-                                newsLiveData.value = result.articles
-                                insertArticlesInDB(result.articles, sourceId)
-                            }
-                        }
-                    }
-
-                    onFailure = {
-
-                    }
-                }
+        val it = mainApiInterface.getNews(sourceId).execute()
+        it.body()?.let {result ->
+            if(result.articles != null && result.articles.isNotEmpty()){
+                articlesLiveData.postValue(result.articles)
+                insertArticlesInDB(result.articles, sourceId)
             }
         }
-
-        return newsLiveData
     }
 
-    override fun searchLocal(searchText: String , sourceId: String): MutableLiveData<List<Article>> {
-        scope.launch(parentSuperVisor) {
-            val sources = appDataSource.getNewsDao().searchArticles(searchText,sourceId)
-            newsLiveData.postValue(sources)
-        }
-        return newsLiveData
+    override suspend fun searchLocal(searchText: String , sourceId: String, articlesLiveData: MutableLiveData<List<Article>>) {
+        val sources = appDataSource.getNewsDao().searchArticles(searchText,sourceId)
+        articlesLiveData.postValue(sources)
     }
 
 
     private fun insertArticlesInDB(articles : List<Article> , sourceId : String){
-        scope.launch(parentSuperVisor) {
-            for (article in articles){
-                article.sourceId = sourceId
-            }
-            appDataSource.getNewsDao().insertArticles(articles)
+        for (article in articles){
+            article.sourceId = sourceId
         }
+        appDataSource.getNewsDao().insertArticles(articles)
     }
-    fun stopProcesses(){
-        parentSuperVisor.cancelChildren()
-    }
-
 }

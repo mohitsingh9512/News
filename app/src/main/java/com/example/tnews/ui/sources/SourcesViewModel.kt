@@ -3,7 +3,11 @@ package com.example.tnews.ui.sources
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.tnews.network.response.NewsSource
+import kotlinx.coroutines.CoroutineExceptionHandler
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class SourcesViewModel @Inject constructor(
@@ -14,15 +18,14 @@ class SourcesViewModel @Inject constructor(
     val newsSourcesLiveData : LiveData<List<NewsSource>>
         get() = _newsSourcesLiveData
 
+    private val coroutineExceptionHandler = CoroutineExceptionHandler { _ , throwable ->
+
+    }
 
     fun getSources() : LiveData<List<NewsSource>>{
-        _newsSourcesLiveData = sourcesRepository.getSources()
+        viewModelScope.launch(Dispatchers.Default + coroutineExceptionHandler) {
+            sourcesRepository.getSources(_newsSourcesLiveData)
+        }
         return newsSourcesLiveData
     }
-
-    override fun onCleared() {
-        super.onCleared()
-        sourcesRepository.stopProcesses()
-    }
-
 }

@@ -1,8 +1,8 @@
 package com.example.tnews.ui.sources
 
-import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.example.tnews.network.response.NewsSource
 
 interface SourcesRepository{
-    fun getSources() : LiveData<List<NewsSource>>
+    suspend fun getSources(newsSourceLiveData: MutableLiveData<List<NewsSource>>)
 }

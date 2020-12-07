@@ -9,7 +9,7 @@ import com.example.tnews.persistance.AppDatabase
 import javax.inject.Inject
 import javax.inject.Singleton
 
-interface NewsRepository {
-    fun getNews(sourceId : String) : LiveData<List<Article>>
-    fun searchLocal(searchText : String,sourceId : String) : MutableLiveData<List<Article>>
+interface  NewsRepository {
+    suspend fun getNews(sourceId : String, articlesLiveData : MutableLiveData<List<Article>>)
+    suspend fun searchLocal(searchText : String,sourceId : String, articlesLiveData: MutableLiveData<List<Article>>)
 }

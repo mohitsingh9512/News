@@ -85,6 +85,7 @@ class NewsFragment : BaseMVVMFragment<NewsFragmentBinding>() , NewsListener{
             searchLocal("")
         }
         newsFragmentBinding.backIcon.setOnClickListener {
+            context?.hideKeyboard(it)
             activity?.onBackPressed()
         }
     }

@@ -63,5 +63,4 @@ class SourcesFragment : BaseMVVMFragment<SourcesFragmentBinding>() , SourcesList
         val fragment = NewsFragment.newInstance(newsSource.id,newsSource.name)
         mActivityHelper.replaceFragment(requireActivity(),fragment,R.id.container,true)
     }
-
 }
