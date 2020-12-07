@@ -10,7 +10,6 @@ import dagger.android.AndroidInjector
 import dagger.android.support.AndroidSupportInjectionModule
 import javax.inject.Singleton
 
-
 @Singleton
 @Component(
     modules = [
@@ -28,7 +27,4 @@ interface AppComponent : AndroidInjector<BaseApplication> {
 
         fun build(): AppComponent
     }
-
-    val activityHelper : ActivityHelper
-
 }
