@@ -49,6 +49,15 @@ class NewsRepositoryImpl @Inject constructor() : NewsRepository{
         return newsLiveData
     }
 
+    override fun searchLocal(searchText: String , sourceId: String): MutableLiveData<List<Article>> {
+        scope.launch(parentSuperVisor) {
+            val sources = appDataSource.getNewsDao().searchArticles(searchText,sourceId)
+            newsLiveData.postValue(sources)
+        }
+        return newsLiveData
+    }
+
+
     private fun insertArticlesInDB(articles : List<Article> , sourceId : String){
         scope.launch(parentSuperVisor) {
             for (article in articles){

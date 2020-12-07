@@ -32,17 +32,21 @@ class SourcesFragment : BaseMVVMFragment<SourcesFragmentBinding>() , SourcesList
         sourceViewModel = getViewModel(SourcesViewModel::class.java)
         sourcesFragmentBinding.viewModel = sourceViewModel
         sourcesFragmentBinding.lifecycleOwner = viewLifecycleOwner
+        initData()
         getSources()
+    }
+
+    private fun initData(){
+        sourcesFragmentBinding.rvSources.layoutManager = LinearLayoutManager(
+                context,
+                LinearLayoutManager.VERTICAL,
+                false
+        )
+        sourcesFragmentBinding.rvSources.adapter = SourcesAdapter(this)
     }
 
     private fun getSources() {
         sourceViewModel?.getSources()
-        sourcesFragmentBinding.rvSources.layoutManager = LinearLayoutManager(
-            context,
-            LinearLayoutManager.VERTICAL,
-            false
-        )
-        sourcesFragmentBinding.rvSources.adapter = SourcesAdapter(this)
     }
 
     companion object {

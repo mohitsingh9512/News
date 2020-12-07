@@ -21,6 +21,11 @@ class NewsViewModel @Inject constructor(
         return newsLiveData
     }
 
+    fun searchLocal(searchText : String, sourceId: String) : LiveData<List<Article>>{
+        _newsLiveData = newsRepositoryImpl.searchLocal(searchText,sourceId)
+        return newsLiveData
+    }
+
     override fun onCleared() {
         super.onCleared()
         newsRepositoryImpl.stopProcesses()

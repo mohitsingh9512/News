@@ -48,8 +48,8 @@ class NewsFragment : BaseMVVMFragment<NewsFragmentBinding>() , NewsListener{
         initData()
         setListeners()
         getNews()
-        newsViewModel?.searchField?.observe(viewLifecycleOwner,{
-
+        newsViewModel?.searchField?.observe(viewLifecycleOwner,{ textChanged ->
+            searchLocal(textChanged)
         })
     }
 
@@ -59,6 +59,12 @@ class NewsFragment : BaseMVVMFragment<NewsFragmentBinding>() , NewsListener{
         }else {
             newsFragmentBinding.toolbarText.text = sourceId
         }
+        newsFragmentBinding.rvNews.layoutManager = LinearLayoutManager(
+                context,
+                LinearLayoutManager.VERTICAL,
+                false
+        )
+        newsFragmentBinding.rvNews.adapter = NewsAdapter(this)
     }
     private fun setListeners(){
         newsFragmentBinding.searchIcon.setOnClickListener {
@@ -85,14 +91,11 @@ class NewsFragment : BaseMVVMFragment<NewsFragmentBinding>() , NewsListener{
 
     private fun getNews() {
         newsViewModel?.getNews(sourceId!!)
-        newsFragmentBinding.rvNews.layoutManager = LinearLayoutManager(
-            context,
-            LinearLayoutManager.VERTICAL,
-            false
-        )
-        newsFragmentBinding.rvNews.adapter = NewsAdapter(this)
     }
 
+    private fun searchLocal(newText : String) {
+        newsViewModel?.searchLocal("%$newText%" , sourceId!!)
+    }
     companion object {
         fun newInstance(sourceId : String,sourceName : String?) =
                 NewsFragment()
