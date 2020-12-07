@@ -18,8 +18,15 @@ class SourcesViewModel @Inject constructor(
     val newsSourcesLiveData : LiveData<List<NewsSource>>
         get() = _newsSourcesLiveData
 
-    private val coroutineExceptionHandler = CoroutineExceptionHandler { _ , throwable ->
+    private var _isErrorLiveData = MutableLiveData<Boolean>()
 
+    val isErrorLiveData : LiveData<Boolean>
+     get() = _isErrorLiveData
+
+    private val coroutineExceptionHandler = CoroutineExceptionHandler { _ , throwable ->
+        if(newsSourcesLiveData.value?.isEmpty() == true){
+            _isErrorLiveData.value = true
+        }
     }
 
     fun getSources() : LiveData<List<NewsSource>>{

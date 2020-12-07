@@ -19,12 +19,13 @@
                 android:layout_marginEnd="@dimen/d_8sdp">
 
                 <ImageView
-                    android:layout_width="@dimen/d_25sdp"
+                    android:layout_width="@dimen/d_40sdp"
                     android:layout_height="match_parent"
                     android:src="@drawable/back"
                     android:id="@+id/back_icon"
                     tools:visibility="visible"
                     android:visibility="visible"
+                    android:padding="@dimen/d_6sdp"
                     android:layout_marginLeft="@dimen/d_10sdp"
                     android:layout_marginStart="@dimen/d_10sdp"
                     android:contentDescription="@string/source_image_description" />

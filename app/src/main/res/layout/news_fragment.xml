@@ -24,19 +24,21 @@
                 android:layout_marginEnd="@dimen/d_8sdp">
 
                 <ImageView
-                    android:layout_width="@dimen/d_25sdp"
+                    android:layout_width="@dimen/d_40sdp"
                     android:layout_height="match_parent"
                     android:id="@+id/search_icon"
                     android:src="@drawable/search"
                     tools:visibility="visible"
                     android:visibility="visible"
+                    android:padding="@dimen/d_6sdp"
                     android:layout_alignParentEnd="true"
                     android:layout_alignParentRight="true"
                     android:contentDescription="@string/source_image_description" />
 
                 <ImageView
-                    android:layout_width="@dimen/d_25sdp"
+                    android:layout_width="@dimen/d_40sdp"
                     android:layout_height="match_parent"
+                    android:padding="@dimen/d_6sdp"
                     android:id="@+id/close_icon"
                     android:src="@drawable/close"
                     tools:visibility="visible"
@@ -46,12 +48,13 @@
                     android:layout_alignParentRight="true" />
 
                 <ImageView
-                    android:layout_width="@dimen/d_25sdp"
+                    android:layout_width="@dimen/d_40sdp"
                     android:layout_height="match_parent"
                     android:src="@drawable/back"
                     android:id="@+id/back_icon"
                     tools:visibility="visible"
                     android:visibility="visible"
+                    android:padding="@dimen/d_6sdp"
                     android:layout_marginLeft="10dp"
                     android:layout_marginStart="10dp"
                     android:contentDescription="@string/source_image_description" />
